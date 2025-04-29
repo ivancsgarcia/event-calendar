@@ -31,16 +31,16 @@ const Register = () => {
         }
     };
     return (
-        <div className="flex min-h-screen items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center bg-gray-50">
             <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-sm rounded border px-8 pt-8 pb-4 shadow-md"
+                className="w-full max-w-sm rounded-xl border border-gray-100 bg-white px-8 py-10 shadow-lg"
             >
-                <h1 className="mb-6 text-center text-2xl font-bold uppercase">
+                <h1 className="mb-8 text-center text-3xl font-semibold tracking-tight text-gray-900">
                     Register
                 </h1>
-                <div className="mb-4">
-                    <label htmlFor="" className="mb-1 block">
+                <div className="mb-5">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                         Username
                     </label>
                     <input
@@ -49,11 +49,11 @@ const Register = () => {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             setUsername(e.target.value);
                         }}
-                        className="w-full rounded border p-2"
+                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                     />
                 </div>
-                <div className="mb-4">
-                    <label htmlFor="" className="mb-1 block">
+                <div className="mb-5">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                         Email
                     </label>
                     <input
@@ -62,12 +62,12 @@ const Register = () => {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             setEmail(e.target.value);
                         }}
-                        className="w-full rounded border p-2"
+                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                     />
                 </div>
 
-                <div className="mb-4">
-                    <label htmlFor="" className="mb-1 block">
+                <div className="mb-5">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                         Password
                     </label>
                     <input
@@ -76,11 +76,11 @@ const Register = () => {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             setPassword(e.target.value);
                         }}
-                        className="w-full rounded border p-2"
+                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                     />
                 </div>
                 <div className="mb-6">
-                    <label htmlFor="" className="mb-1 block">
+                    <label className="mb-2 block text-sm font-medium text-gray-700">
                         Confirm Password
                     </label>
                     <input
@@ -89,19 +89,21 @@ const Register = () => {
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             setConfirmPassword(e.target.value);
                         }}
-                        className="w-full rounded border p-2"
+                        className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                     />
                 </div>
-                <button className="mb-6 w-full cursor-pointer rounded border p-2">
+                <button className="mb-4 w-full rounded-md bg-blue-600 py-2 font-medium text-white shadow transition hover:bg-blue-700">
                     Create Account
                 </button>
 
-                <Link
-                    to={"/login"}
-                    className="block text-center hover:underline"
-                >
-                    Login
-                </Link>
+                <div className="text-center">
+                    <Link
+                        to={"/login"}
+                        className="text-sm text-blue-600 hover:underline"
+                    >
+                        Already have an account? Login
+                    </Link>
+                </div>
             </form>
         </div>
     );

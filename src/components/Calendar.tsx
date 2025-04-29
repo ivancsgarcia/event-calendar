@@ -39,9 +39,10 @@ const Calendar = ({
                         end: event.eventEndTime
                             ? `${isoDate}T${event.eventEndTime}`
                             : isoDate,
-                        color: "green",
+                        color: "blue",
                     };
                 })}
+                dayCellClassNames={"cursor-pointer hover:bg-blue-100"}
             />
         </div>
     );

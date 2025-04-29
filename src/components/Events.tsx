@@ -9,6 +9,7 @@ const Events = ({
     handleEdit: (event: Event) => void;
 }) => {
     const [event, setEvent] = useState<Event>();
+
     const groupEventsByMonth = (events: Event[]) => {
         const months: Record<string, Record<string, Event[]>> = {};
         events.forEach((event) => {
@@ -32,8 +33,8 @@ const Events = ({
 
     return (
         <>
-            <div className="h-full border bg-white px-4 py-8">
-                <h1 className="text-center text-xl font-bold uppercase">
+            <div className="h-full rounded-xl border bg-white px-4 py-8 shadow-sm">
+                <h1 className="mb-6 text-center text-2xl font-semibold tracking-wide text-gray-800 uppercase">
                     Events
                 </h1>
                 <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 max-h-96 overflow-y-auto md:max-h-[500px] lg:max-h-[700px]">
@@ -44,7 +45,7 @@ const Events = ({
                                 .map(([monthKey, datesObj]) => (
                                     <div key={monthKey}>
                                         {/* Month Title */}
-                                        <h2 className="mt-4 mb-2 px-4 text-lg font-bold">
+                                        <h2 className="mt-8 mb-4 px-2 text-xl font-bold tracking-wide text-blue-700">
                                             {new Date(
                                                 `${monthKey}-01`,
                                             ).toLocaleString("en-US", {
@@ -61,10 +62,10 @@ const Events = ({
                                             .map(([date, eventsOnDate]) => (
                                                 <div
                                                     key={date}
-                                                    className="flex gap-2 p-4"
+                                                    className="mb-4 flex gap-4 rounded-lg bg-gray-50 p-4 shadow-sm"
                                                 >
-                                                    <div>
-                                                        <p className="text-xl font-bold">
+                                                    <div className="flex w-16 flex-col items-center justify-center">
+                                                        <span className="text-2xl font-bold text-gray-700">
                                                             {new Date(
                                                                 date,
                                                             ).toLocaleDateString(
@@ -73,8 +74,8 @@ const Events = ({
                                                                     day: "numeric",
                                                                 },
                                                             )}
-                                                        </p>
-                                                        <p>
+                                                        </span>
+                                                        <span className="text-sm text-gray-500">
                                                             {new Date(
                                                                 date,
                                                             ).toLocaleDateString(
@@ -84,34 +85,34 @@ const Events = ({
                                                                         "short",
                                                                 },
                                                             )}
-                                                        </p>
+                                                        </span>
                                                     </div>
-
-                                                    <div className="w-1 bg-gray-400"></div>
-                                                    <div className="w-full">
+                                                    <div className="mx-2 w-1 rounded-full bg-gray-200"></div>
+                                                    <div className="flex-1 space-y-2">
                                                         {eventsOnDate.map(
                                                             (ev) => (
                                                                 <div
+                                                                    key={ev.id}
                                                                     onClick={() =>
                                                                         setEvent(
                                                                             ev,
                                                                         )
                                                                     }
-                                                                    className="mb-1 flex cursor-pointer items-center justify-between rounded border p-3"
+                                                                    className="flex cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition hover:border-blue-400 hover:bg-blue-50"
                                                                 >
                                                                     <div>
-                                                                        <h1 className="font-bold">
+                                                                        <h1 className="font-medium text-gray-800">
                                                                             {
                                                                                 ev.eventName
                                                                             }
                                                                         </h1>
                                                                     </div>
                                                                     <div>
-                                                                        <p>
+                                                                        <span className="text-sm text-gray-600">
                                                                             {to12Hours(
                                                                                 ev.eventStartTime,
                                                                             )}
-                                                                        </p>
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             ),
@@ -123,34 +124,65 @@ const Events = ({
                                 ))}
                         </div>
                     ) : (
-                        <p>No current events.</p>
+                        <p className="text-center text-gray-500">
+                            No current events.
+                        </p>
                     )}
                 </div>
             </div>
 
             {event && (
-                <div
-                    onClick={() => setEvent(undefined)}
-                    className="fixed inset-0 z-50 flex items-center justify-center"
-                >
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
                     <div
-                        onClick={() => {}}
-                        className="fixed inset-0 bg-black opacity-50"
+                        onClick={() => setEvent(undefined)}
+                        className="fixed inset-0 bg-black opacity-40"
                     />
-                    <div className="z-10 w-xl bg-white">
-                        <div>
-                            <p>{event.eventDate}</p>
-                            <p>{event.eventName}</p>
-                            <p>{event.eventStartTime}</p>
-                            <p>{event.eventEndTime}</p>
+                    <div className="z-10 w-full max-w-md rounded-xl bg-white p-8 shadow-lg">
+                        <h2 className="mb-4 text-xl font-semibold text-gray-800">
+                            Event Details
+                        </h2>
+                        <div className="space-y-2">
                             <div>
-                                <button
-                                    onClick={() => handleEdit(event)}
-                                    className="cursor-pointer rounded border p-2"
-                                >
-                                    Edit Event
-                                </button>
+                                <span className="font-semibold text-gray-700">
+                                    Name:{" "}
+                                </span>
+                                {event.eventName}
                             </div>
+                            <div>
+                                <span className="font-semibold text-gray-700">
+                                    Date:{" "}
+                                </span>
+                                {event.eventDate}
+                            </div>
+                            <div>
+                                <span className="font-semibold text-gray-700">
+                                    Start Time:{" "}
+                                </span>
+                                {to12Hours(event.eventStartTime)}
+                            </div>
+                            <div>
+                                <span className="font-semibold text-gray-700">
+                                    End Time:{" "}
+                                </span>
+                                {to12Hours(event.eventEndTime)}
+                            </div>
+                        </div>
+                        <div className="mt-6 flex justify-end gap-2">
+                            <button
+                                onClick={() => setEvent(undefined)}
+                                className="rounded bg-gray-200 px-4 py-2 text-gray-700 transition hover:bg-gray-300"
+                            >
+                                Close
+                            </button>
+                            <button
+                                onClick={() => {
+                                    handleEdit(event);
+                                    setEvent(undefined);
+                                }}
+                                className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+                            >
+                                Edit Event
+                            </button>
                         </div>
                     </div>
                 </div>

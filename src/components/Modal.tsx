@@ -14,9 +14,13 @@ const Modal = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
                 onClick={handleCloseModal}
-                className="fixed inset-0 bg-black opacity-50"
+                className="bg-opacity-40 fixed inset-0 bg-black/50 transition-opacity"
+                aria-label="Close modal"
+                tabIndex={-1}
             />
-            <div className="z-10 w-xl bg-white">{children}</div>
+            <div className="z-10 w-full max-w-md rounded-xl bg-white p-8 shadow-2xl">
+                {children}
+            </div>
         </div>
     );
 };

@@ -118,12 +118,20 @@ const Home = () => {
 
     return (
         <>
-            <div className="bg-gray-200">
-                <div className="relative container mx-auto min-h-screen px-4 py-12">
-                    <h1 className="mb-8 text-center text-2xl font-bold uppercase">
-                        Event Calendar
-                    </h1>
-                    <div className="flex flex-col-reverse gap-4 md:justify-around lg:flex-row">
+            <div className="min-h-screen bg-gray-50">
+                <div className="container mx-auto px-4 py-12">
+                    <header className="mb-10 flex items-center justify-between">
+                        <h1 className="text-3xl font-bold tracking-wide text-blue-700 uppercase">
+                            Event Calendar
+                        </h1>
+                        <button
+                            onClick={handleSignOut}
+                            className="cursor-pointer rounded bg-red-500 px-4 py-2 font-medium text-white shadow transition hover:bg-red-600"
+                        >
+                            Sign out
+                        </button>
+                    </header>
+                    <div className="flex flex-col gap-8 lg:flex-row">
                         <div className="w-full lg:w-8/12">
                             <Calendar
                                 events={events}
@@ -134,12 +142,6 @@ const Home = () => {
                             <Events events={events} handleEdit={handleEdit} />
                         </div>
                     </div>
-                    <button
-                        onClick={handleSignOut}
-                        className="absolute top-4 right-4 block cursor-pointer rounded border border-transparent bg-red-500 p-2 text-white"
-                    >
-                        Sign out
-                    </button>
                 </div>
             </div>
             {eventDate && (
@@ -159,12 +161,17 @@ const Home = () => {
 
             {editEvent && (
                 <Modal setEventDate={() => setEditEvent(undefined)}>
-                    <form onSubmit={handleUpdateEvent} className="border p-4">
-                        <h1 className="mb-4 text-center font-bold">
+                    <form
+                        onSubmit={handleUpdateEvent}
+                        className="mx-auto w-full max-w-md rounded-xl border border-gray-100 bg-white px-8 py-8 shadow-lg"
+                    >
+                        <h1 className="mb-6 text-center text-2xl font-semibold tracking-tight text-gray-900">
                             Edit Event
                         </h1>
-                        <div className="mb-4">
-                            <label className="mb-1 block">Event Name</label>
+                        <div className="mb-5">
+                            <label className="mb-2 block text-sm font-medium text-gray-700">
+                                Event Name
+                            </label>
                             <input
                                 type="text"
                                 value={editEvent.eventName}
@@ -175,20 +182,22 @@ const Home = () => {
                                     })
                                 }
                                 required
-                                className="w-full border p-2"
+                                className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                             />
                         </div>
-                        <div className="mb-4">
-                            <label className="mb-1 block">Event Date</label>
+                        <div className="mb-5">
+                            <label className="mb-2 block text-sm font-medium text-gray-700">
+                                Event Date
+                            </label>
                             <input
                                 type="text"
                                 value={editEvent.eventDate}
                                 disabled
-                                className="w-full border p-2"
+                                className="w-full rounded-md border border-gray-200 bg-gray-100 p-2 text-gray-900"
                             />
                         </div>
-                        <div className="mb-4">
-                            <label className="mb-1 block">
+                        <div className="mb-5">
+                            <label className="mb-2 block text-sm font-medium text-gray-700">
                                 Event Start Time
                             </label>
                             <input
@@ -201,11 +210,13 @@ const Home = () => {
                                     })
                                 }
                                 required
-                                className="w-full border p-2"
+                                className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                             />
                         </div>
-                        <div className="mb-6">
-                            <label className="mb-1 block">Event End Time</label>
+                        <div className="mb-8">
+                            <label className="mb-2 block text-sm font-medium text-gray-700">
+                                Event End Time
+                            </label>
                             <input
                                 type="time"
                                 value={editEvent.eventEndTime}
@@ -216,20 +227,20 @@ const Home = () => {
                                     })
                                 }
                                 required
-                                className="w-full border p-2"
+                                className="w-full rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-900 transition focus:border-blue-500 focus:bg-white focus:outline-none"
                             />
                         </div>
                         <div className="flex justify-between">
                             <button
                                 type="button"
                                 onClick={handleDeleteEvent}
-                                className="rounded bg-red-600 px-4 py-2 text-white"
+                                className="rounded bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700"
                             >
                                 Delete
                             </button>
                             <button
                                 type="submit"
-                                className="rounded bg-blue-600 px-4 py-2 text-white"
+                                className="rounded bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
                             >
                                 Save
                             </button>
